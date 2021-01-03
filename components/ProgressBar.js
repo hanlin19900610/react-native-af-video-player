@@ -34,8 +34,8 @@ class ProgressBar extends Component {
     const { progress, theme } = this.props
     const incomplete = 1 - progress
     Animated.parallel([
-      Animated.timing(this.complete, { toValue: progress, duration: 250 }),
-      Animated.timing(this.incomplete, { toValue: incomplete, duration: 250 })
+      Animated.timing(this.complete, { toValue: progress, duration: 250, useNativeDriver: true }),
+      Animated.timing(this.incomplete, { toValue: incomplete, duration: 250, useNativeDriver: true })
     ]).start()
     return (
       <View style={styles.outerBar}>

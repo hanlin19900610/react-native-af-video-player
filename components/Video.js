@@ -101,7 +101,7 @@ class Video extends Component {
       inlineHeight,
       duration: data.duration
     }, () => {
-      Animated.timing(this.animInline, { toValue: inlineHeight, duration: 200 }).start()
+      Animated.timing(this.animInline, { toValue: inlineHeight, duration: 200, useNativeDriver: true }).start()
       this.props.onPlay(!this.state.paused)
       if (!this.state.paused) {
         KeepAwake.activate()
@@ -262,16 +262,16 @@ class Video extends Component {
 
   animToFullscreen(height) {
     Animated.parallel([
-      Animated.timing(this.animFullscreen, { toValue: height, duration: 200 }),
-      Animated.timing(this.animInline, { toValue: height, duration: 200 })
+      Animated.timing(this.animFullscreen, { toValue: height, duration: 200, useNativeDriver: true }),
+      Animated.timing(this.animInline, { toValue: height, duration: 200, useNativeDriver: true })
     ]).start()
   }
 
   animToInline(height) {
     const newHeight = height || this.state.inlineHeight
     Animated.parallel([
-      Animated.timing(this.animFullscreen, { toValue: newHeight, duration: 100 }),
-      Animated.timing(this.animInline, { toValue: this.state.inlineHeight, duration: 100 })
+      Animated.timing(this.animFullscreen, { toValue: newHeight, duration: 100, useNativeDriver: true }),
+      Animated.timing(this.animInline, { toValue: this.state.inlineHeight, duration: 100, useNativeDriver: true })
     ]).start()
   }
 
@@ -288,7 +288,6 @@ class Video extends Component {
     const percent = seconds / this.state.duration
     if (seconds > this.state.duration) {
       throw new Error(`Current time (${seconds}) exceeded the duration ${this.state.duration}`)
-      return false
     }
     return this.onSeekRelease(percent)
   }
@@ -492,14 +491,14 @@ Video.defaultProps = {
   playWhenInactive: false,
   rotateToFullScreen: false,
   lockPortraitOnFsExit: false,
-  onEnd: () => {},
-  onLoad: () => {},
-  onPlay: () => {},
-  onError: () => {},
-  onProgress: () => {},
+  onEnd: () => { },
+  onLoad: () => { },
+  onPlay: () => { },
+  onError: () => { },
+  onProgress: () => { },
   onMorePress: undefined,
-  onFullScreen: () => {},
-  onTimedMetadata: () => {},
+  onFullScreen: () => { },
+  onTimedMetadata: () => { },
   rate: 1,
   volume: 1,
   lockRatio: undefined,
