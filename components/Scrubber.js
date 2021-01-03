@@ -4,7 +4,6 @@ import {
   View,
   Platform,
   StyleSheet,
-  Slider as RNSlider
 } from 'react-native'
 import Slider from 'react-native-slider'
 
@@ -42,8 +41,8 @@ const Scrubber = (props) => {
           maximumTrackTintColor={trackColor}
           trackClickable
         />
-      :
-        <RNSlider
+        :
+        <Slider
           style={styles.slider}
           onValueChange={val => onSeek(val)}
           onSlidingComplete={val => onSeekRelease(val)}
